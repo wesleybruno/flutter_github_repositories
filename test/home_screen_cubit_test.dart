@@ -26,7 +26,7 @@ void main() {
     () => homeScreenCubit.close(),
   );
 
-  group('BuscarRepositorios (cubit): ', () {
+  group('Cubit Home Screen: ', () {
     test(
       'Verificar estado inicial',
       () {
@@ -36,60 +36,60 @@ void main() {
         );
       },
     );
+
+    blocTest<HomeScreenCubit, HomeScreenState>(
+      'Sucesso - Buscar Lista repositorios',
+      build: () {
+        when(
+          mockRepositoriosRepository.buscarRepositorios(),
+        ).thenAnswer(
+          (_) async => Right(listaRepositorios),
+        );
+        return homeScreenCubit;
+      },
+      act: (bloc) async => homeScreenCubit.carregarRepositorios(),
+      expect: <HomeScreenState>[
+        HomeCarregandoDadosState(),
+        HomeDadosCarregadosState(listaRepositorios),
+      ],
+    );
+
+    blocTest<HomeScreenCubit, HomeScreenState>(
+      'Erro - Falha ao buscar lista de repositorios',
+      build: () {
+        when(
+          mockRepositoriosRepository.buscarRepositorios(),
+        ).thenAnswer(
+          (_) async => Left(
+            ApiError(statusCode: 400),
+          ),
+        );
+        return homeScreenCubit;
+      },
+      act: (bloc) async => homeScreenCubit.carregarRepositorios(),
+      expect: <HomeScreenState>[
+        HomeCarregandoDadosState(),
+        HomeErroCarregarDadosState()
+      ],
+    );
+
+    blocTest<HomeScreenCubit, HomeScreenState>(
+      'Sem Internet',
+      build: () {
+        when(
+          mockRepositoriosRepository.buscarRepositorios(),
+        ).thenAnswer(
+          (_) async => Left(
+            ApiError(statusCode: null),
+          ),
+        );
+        return homeScreenCubit;
+      },
+      act: (bloc) async => homeScreenCubit.carregarRepositorios(),
+      expect: <HomeScreenState>[
+        HomeCarregandoDadosState(),
+        HomeSemConexaoState()
+      ],
+    );
   });
-
-  blocTest<HomeScreenCubit, HomeScreenState>(
-    'Sucesso - Buscar Lista repositorios',
-    build: () {
-      when(
-        mockRepositoriosRepository.buscarRepositorios(),
-      ).thenAnswer(
-        (_) async => Right(listaRepositorios),
-      );
-      return homeScreenCubit;
-    },
-    act: (bloc) async => homeScreenCubit.carregarRepositorios(),
-    expect: <HomeScreenState>[
-      HomeCarregandoDadosState(),
-      HomeDadosCarregadosState(listaRepositorios),
-    ],
-  );
-
-  blocTest<HomeScreenCubit, HomeScreenState>(
-    'Erro - Falha ao buscar lista de repositorios',
-    build: () {
-      when(
-        mockRepositoriosRepository.buscarRepositorios(),
-      ).thenAnswer(
-        (_) async => Left(
-          ApiError(statusCode: 400),
-        ),
-      );
-      return homeScreenCubit;
-    },
-    act: (bloc) async => homeScreenCubit.carregarRepositorios(),
-    expect: <HomeScreenState>[
-      HomeCarregandoDadosState(),
-      HomeErroCarregarDadosState()
-    ],
-  );
-
-  blocTest<HomeScreenCubit, HomeScreenState>(
-    'Sem Internet',
-    build: () {
-      when(
-        mockRepositoriosRepository.buscarRepositorios(),
-      ).thenAnswer(
-        (_) async => Left(
-          ApiError(statusCode: null),
-        ),
-      );
-      return homeScreenCubit;
-    },
-    act: (bloc) async => homeScreenCubit.carregarRepositorios(),
-    expect: <HomeScreenState>[
-      HomeCarregandoDadosState(),
-      HomeSemConexaoState()
-    ],
-  );
 }
