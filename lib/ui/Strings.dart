@@ -7,4 +7,7 @@ abstract class Strings {
   static final tenteMaisTarde =
       'Parece que ocorreu algum erro, por favor tente mais tarde.';
   static final desculpe = 'Desculpe... Algo não está certo.';
+
+  static String erroAoDecodificar(String nomeModelo) =>
+      'Erro ao decodificar $nomeModelo';
 }

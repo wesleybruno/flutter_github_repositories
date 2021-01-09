@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_repositories/app/screens/home_screen.dart';
+import 'package:github_repositories/ui/Cores.dart';
 import 'package:github_repositories/ui/Fontes.dart';
 
 class GitHubRepositoriesApp extends StatelessWidget {
@@ -9,7 +10,7 @@ class GitHubRepositoriesApp extends StatelessWidget {
       title: 'GitHub',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Cores.azulClaro,
         fontFamily: Fontes.montserrat,
       ),
       home: Scaffold(

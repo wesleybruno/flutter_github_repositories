@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:github_repositories/app/models/repositorio_model.dart';
-import 'package:github_repositories/app/screens/widgets/item_repositorio_viewmodel.dart';
 import 'package:github_repositories/ui/Cores.dart';
 import 'package:github_repositories/ui/DimensoesTela.dart';
 import 'package:github_repositories/ui/Fontes.dart';
@@ -13,25 +12,14 @@ class ItemRepositorioScreenFactory {
   Widget createList({
     List<RepositorioModel> listaRepositoriosModel,
   }) {
-    final List<ItemRepositorioViewModel> listaViewModel = [];
-
-    listaRepositoriosModel.asMap().forEach((index, element) {
-      listaViewModel.add(ItemRepositorioViewModel(
-        autor: element.owner.login,
-        avatarUrl: element.owner.avatarUrl,
-        linkRepositorio: element.htmlUrl,
-        nomeRepositorio: element.name,
-      ));
-    });
-
     final List<Widget> _listaWidgets = List.generate(
-      listaViewModel.length,
+      listaRepositoriosModel.length,
       (index) => _itemLista(
-          index,
-          () => {_launchURL(listaViewModel[index].linkRepositorio)},
-          listaViewModel[index].autor,
-          listaViewModel[index].nomeRepositorio,
-          listaViewModel[index].avatarUrl),
+        () => {_launchURL(listaRepositoriosModel[index].htmlUrl)},
+        listaRepositoriosModel[index].owner?.login,
+        listaRepositoriosModel[index].name,
+        listaRepositoriosModel[index].owner?.avatarUrl,
+      ),
     );
 
     _listaWidgets.insert(0, _textoPrincipal());
@@ -50,18 +38,21 @@ class ItemRepositorioScreenFactory {
   }
 
   Widget _textoPrincipal() {
-    return Text(
-      'Lista de Repositórios',
-      style: Themes.defaultTextStyle.copyWith(
-        color: Cores.preto,
-        fontWeight: Fontes.bold,
-        fontSize: 15.ssp,
+    return Container(
+      margin: EdgeInsets.all(8.w),
+      child: Text(
+        'Lista de Repositórios',
+        textAlign: TextAlign.left,
+        style: Themes.defaultTextStyle.copyWith(
+          color: Cores.preto,
+          fontWeight: Fontes.bold,
+          fontSize: 15.ssp,
+        ),
       ),
     );
   }
 
   Widget _itemLista(
-    int index,
     Function aoApertarItemTopico,
     String autor,
     String nomeRepositorio,
