@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:github_repositories/app/datasource/repositorios_datasource.dart';
+import 'package:github_repositories/app/repository/repositorios_decode_helper.dart';
 import 'package:github_repositories/app/repository/repositorios_repository.dart';
 import 'package:github_repositories/app/screens/cubit/home_cubit.dart';
 import 'package:github_repositories/configs/client/check_connectivty.dart';
@@ -30,8 +31,13 @@ Future<void> init() async {
   );
 
   dependencia.registerFactory(
+    () => RepositoriosDecodeHelper(),
+  );
+
+  dependencia.registerFactory(
     () => RepositoriosRepository(
       repositorioDataSource: dependencia<GitHubDataSource>(),
+      repositoriosDecodeHelper: dependencia<RepositoriosDecodeHelper>(),
     ),
   );
 
