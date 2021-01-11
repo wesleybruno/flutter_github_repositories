@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:github_repositories/app/models/repositorio_model.dart';
 import 'package:github_repositories/ui/Cores.dart';
@@ -119,9 +121,14 @@ class ItemRepositorioScreenFactory {
         height: 130.h,
         width: 92.w,
         child: imageUrl != null && imageUrl != ""
-            ? Image.network(
-                imageUrl,
+            ? CachedNetworkImage(
+                imageUrl: imageUrl,
                 fit: BoxFit.cover,
+                placeholder: (context, url) => Padding(
+                  padding: EdgeInsets.all(30.h),
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               )
             : Container(
                 padding: EdgeInsets.all(10.w),

@@ -8,9 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await injection.init();
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: Cores.transparente,
-    ),
+    SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
