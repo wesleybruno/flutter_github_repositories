@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:github_repositories/app/comum/widgets/botao_principal.dart';
+import 'package:github_repositories/comum/widgets/botao_principal.dart';
 import 'package:github_repositories/ui/Cores.dart';
 import 'package:github_repositories/ui/DimensoesTela.dart';
-import 'package:github_repositories/ui/Strings.dart';
 import 'package:github_repositories/ui/Themes.dart';
 
-class ErroApiWidget extends StatelessWidget {
+class GenericErrorWidget extends StatelessWidget {
   final Function aoApertarTentarNovamente;
+  final String textoPrincipal;
+  final String textoExplicativo;
+  final String semanticText;
+  final String textoBotao;
   final Color corTexto;
   final Color corIcone;
 
-  const ErroApiWidget({
+  const GenericErrorWidget({
     Key key,
     this.aoApertarTentarNovamente,
+    this.textoPrincipal,
+    this.textoExplicativo,
+    this.semanticText,
+    this.textoBotao,
     this.corTexto,
     this.corIcone,
   }) : super(key: key);
@@ -31,11 +38,10 @@ class ErroApiWidget extends StatelessWidget {
             width: 50.w,
             height: 50.h,
             child: Icon(
-              Icons.error_outline,
+              Icons.perm_scan_wifi_outlined,
               color: corIcone ?? Cores.preto,
               size: 24.0,
-              semanticLabel:
-                  'Tivemos um problema com o servidor, tente novamente!',
+              semanticLabel: semanticText,
             ),
           ),
           Container(
@@ -45,7 +51,7 @@ class ErroApiWidget extends StatelessWidget {
               bottom: 30.h,
             ),
             child: Text(
-              Strings.desculpe,
+              textoPrincipal,
               textAlign: TextAlign.center,
               style: Themes.defaultTextStyle.copyWith(
                 color: corTexto ?? Cores.preto,
@@ -59,7 +65,7 @@ class ErroApiWidget extends StatelessWidget {
             ),
             width: 320.w,
             child: Text(
-              Strings.tenteMaisTarde,
+              textoExplicativo,
               textAlign: TextAlign.center,
               style: Themes.defaultTextStyle.copyWith(
                 color: corTexto ?? Cores.cinza[200],
@@ -68,7 +74,7 @@ class ErroApiWidget extends StatelessWidget {
             ),
           ),
           BotaoPrincipal(
-            texto: Strings.tentarNovamente,
+            texto: textoBotao,
             corTexto: Cores.preto,
             aoClicar: aoApertarTentarNovamente,
             altura: 55.h,

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:github_repositories/app/comum/widgets/erro_api_widget.dart';
-import 'package:github_repositories/app/comum/widgets/sem_internet.dart';
 import 'package:github_repositories/app/screens/cubit/home_cubit.dart';
 import 'package:github_repositories/app/screens/widgets/item_repositorio_factory.dart';
+import 'package:github_repositories/comum/widgets/erro_api_widget.dart';
+import 'package:github_repositories/comum/widgets/sem_internet_widget.dart';
 import 'package:github_repositories/injection_container.dart';
 import 'package:github_repositories/ui/Cores.dart';
 import 'package:github_repositories/ui/DimensoesTela.dart';
