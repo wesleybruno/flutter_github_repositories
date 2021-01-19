@@ -24,7 +24,7 @@ jobs:
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols
     - name: Upload Symbols Android
-    - uses: AButler/upload-release-assets@v2.0
+      uses: AButler/upload-release-assets@v2.0
       with:
         files: 'symbols/*'
         repo-token: ${{ secrets.REPOSITORIES_KEY }}
