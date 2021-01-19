@@ -25,6 +25,6 @@ jobs:
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols
     - name: Upload Symbols Android
     - uses: AButler/upload-release-assets@v2.0
-        with:
-          files: 'artifacts/*;packages/*.nupkg'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: 'artifacts/*;packages/*.nupkg'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
