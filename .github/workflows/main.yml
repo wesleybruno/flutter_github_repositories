@@ -25,7 +25,6 @@ jobs:
     - run: flutter test
     - run: flutter build appbundle
 
-jobs:
   build_producao:
     if: github.ref == 'refs/heads/main'
     name: Build Flutter (Android)
