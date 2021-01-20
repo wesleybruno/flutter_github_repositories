@@ -42,23 +42,16 @@ jobs:
     - run: flutter clean
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
-    - run: ls
     - run: mkdir symbols/iOS/
-    - run: ls
     - run: cp symbols/Android/* symbols/iOS/
-    - run: ls
-    - name: Archive Release
+    - name: Compact Release Files
       uses: thedoctor0/zip-release@master
       with:
         filename: 'symbols.zip'
         path: './symbols'
-    - run: ls
     - run: rm -r ./symbols
-    - run: ls
     - run: mkdir symbols
-    - run: ls
     - run: mv symbols.zip symbols/
-    - run: ls
     - name: Upload Symbols Android
       uses: AButler/upload-release-assets@v2.0
       with:
