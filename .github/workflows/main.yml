@@ -56,10 +56,11 @@ jobs:
     - run: rm -r ./symbols
     - run: ls
     - run: mkdir symbols
+    - run: ls
     - run: mv symbols.zip symbols/
+    - run: ls
     - name: Upload Symbols Android
-      uses: alexellis/upload-assets@0.2.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPOSITORIES_KEY }}
+      uses: AButler/upload-release-assets@v2.0
       with:
-        asset_paths: '["./symbols*"]'
+        files: 'symbols/*'
+        repo-token: ${{ secrets.REPOSITORIES_KEY }}
