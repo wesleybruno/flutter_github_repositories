@@ -45,6 +45,7 @@ jobs:
     - run: cp symbols/Android -r symbols/iOS
     - run: cd symbols/iOS/
     - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
+    - run: cd ../..
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
