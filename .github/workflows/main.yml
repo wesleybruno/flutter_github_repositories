@@ -52,11 +52,14 @@ jobs:
       with:
         filename: 'symbols.zip'
         path: './symbols'
-        token: ${{ secrets.REPOSITORIES_KEY }}
     - run: ls
+    - run: rm -r ./symbols
+    - run: ls
+    - run: mkdir symbols
+    - run: mv symbols.zip symbols/
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
         GITHUB_TOKEN: ${{ secrets.REPOSITORIES_KEY }}
       with:
-        asset_paths: '["./symbols"]'
+        asset_paths: '["./symbols*"]'
