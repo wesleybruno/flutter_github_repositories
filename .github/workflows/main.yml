@@ -42,13 +42,14 @@ jobs:
     - run: flutter clean
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
-    - run: cp symbols/Android -r symbols/iOS
+    - run: cp symbols/Android/* symbols/iOS/
     - run: cd symbols/iOS/
     - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
-    - run: cd ../..
+    - run: cd ../../
+    - run: ls
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
         GITHUB_TOKEN: ${{ secrets.REPOSITORIES_KEY }}
       with:
-        asset_paths: '["./symbols/Android/*", "./symbols/iOS/*"]'
+        asset_paths: '["./symbols/Android", "./symbols/iOS"]'
