@@ -42,10 +42,15 @@ jobs:
     - run: flutter clean
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
+    - run: ls
     - run: mkdir symbols/iOS/
+    - run: ls
     - run: cp symbols/Android/* symbols/iOS/
+    - run: ls
     - run: cd symbols/iOS/
+    - run: ls
     - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
+    - run: ls
     - run: cd ../../
     - run: ls
     - name: Upload Symbols Android
