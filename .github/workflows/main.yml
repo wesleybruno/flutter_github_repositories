@@ -22,10 +22,10 @@ jobs:
         channel: "stable"
     - run: flutter clean
     - run: flutter test
-    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android/${{GITHUB_REF}}
+    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android/${{ github.ref }}
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
         GITHUB_TOKEN: ${{ secrets.REPOSITORIES_KEY }}
       with:
-        asset_paths: '["./symbols/Android/${{GITHUB_REF}}/*"]'
+        asset_paths: '["./symbols/Android/${{ github.ref }}/*"]'
