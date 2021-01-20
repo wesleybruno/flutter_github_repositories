@@ -42,6 +42,7 @@ jobs:
     - run: flutter clean
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
+    - run: mkdir symbols/iOS/
     - run: cp symbols/Android/* symbols/iOS/
     - run: cd symbols/iOS/
     - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
