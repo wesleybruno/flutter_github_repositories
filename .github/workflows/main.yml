@@ -22,9 +22,9 @@ jobs:
         channel: "stable"
     - run: flutter clean
     - run: flutter test
-    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/test
+    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/android
     - name: Upload Symbols Android
       uses: AButler/upload-release-assets@v2.0
       with:
-        files: 'symbols/*'
+        files: 'symbols/android/*'
         repo-token: ${{ secrets.REPOSITORIES_KEY }}
