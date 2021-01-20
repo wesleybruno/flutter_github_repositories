@@ -5,9 +5,12 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release: 
+    types: [created]
 
 jobs:
   build_teste:
+    if: github.ref != 'refs/heads/main'
     name: Build Flutter (Android)
     runs-on: ubuntu-latest
     steps:
@@ -22,15 +25,9 @@ jobs:
     - run: flutter test
     - run: flutter build appbundle
 
-on:
-  push:
-    tags:
-    - 'v*'
-  release:
-    types: [created]
-
 jobs:
   build_producao:
+    if: github.ref == 'refs/heads/main'
     name: Build Flutter (Android)
     runs-on: ubuntu-latest
     steps:
