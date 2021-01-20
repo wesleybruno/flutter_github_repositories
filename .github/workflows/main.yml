@@ -41,7 +41,7 @@ jobs:
         channel: "stable"
     - run: flutter clean
     - run: flutter test
-    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android/${{ github.ref }}
+    - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
     - run: cp symbols/Android -r symbols/iOS
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
