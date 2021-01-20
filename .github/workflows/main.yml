@@ -47,15 +47,16 @@ jobs:
     - run: ls
     - run: cp symbols/Android/* symbols/iOS/
     - run: ls
-    - run: cd symbols/iOS/
-    - run: ls
-    - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
-    - run: ls
-    - run: cd ../../
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        filename: 'symbols.zip'
+        path: './symbols'
+        token: ${{ secrets.REPOSITORIES_KEY }}
     - run: ls
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
         GITHUB_TOKEN: ${{ secrets.REPOSITORIES_KEY }}
       with:
-        asset_paths: '["./symbols/Android", "./symbols/iOS"]'
+        asset_paths: '["./symbols"]'
