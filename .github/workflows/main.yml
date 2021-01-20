@@ -43,6 +43,8 @@ jobs:
     - run: flutter test
     - run: flutter build appbundle --obfuscate --split-debug-info=symbols/Android
     - run: cp symbols/Android -r symbols/iOS
+    - run: cd symbols/iOS/
+    - run: for f in * ; do mv -- "$f" "iOS_$f" ; done
     - name: Upload Symbols Android
       uses: alexellis/upload-assets@0.2.2
       env:
